@@ -1,4 +1,13 @@
-### Extract key vault secret references from choreo_rudder_db
+# Choreo Rudder DB - Secret References Extraction
+
+## Overview
+Extracts key vault secret references from the Choreo Rudder database by querying both secrets and config_maps tables for vault IDs.
+
+## Scripts
+- `extract_rudder_db_secret_refs.py` - Primary extraction script
+- `extract_rudder_db_secret_refs_backup.py` - Backup version
+
+## SQL Query
 
 ```sql
 SELECT 
@@ -19,10 +28,18 @@ WHERE vault_id IS NOT NULL AND organization_id = 'f5aad5f4-4cac-40df-b0ed-e0c3ca
 ORDER BY created_at DESC;
 ```
 
-Execution History
+## Output
+- `key_vault_secrets.csv` - List of unique vault IDs extracted from the database
+- `key_vault_secrets_with_names.csv` - Extended version including secret names
 
-2026/02/02
-Duplicate vault_id values found:
+## Latest Execution History
+
+**2026/02/02**
+- Extracted **692 unique vault IDs** into key_vault_secrets.csv
+- Active secrets: **656** (when compared with AWS Key Vault)
+- **Note**: Duplicate vault_id values found across secrets and config_maps tables
+
+### Duplicate vault_id Values Found:
 pure-visitor-integration-377426398 -> 3 times
 opas-g2-scheduled-task-3865857953 -> 3 times
 mediation-history-classics-and-514186435 -> 3 times

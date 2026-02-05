@@ -1,4 +1,12 @@
-### Extract key vault secret references from choreo_app_db
+# Choreo App DB - Secret References Extraction
+
+## Overview
+Extracts key vault secret references from the Choreo App database by querying configuration values associated with components and organizations.
+
+## Script
+- `extract_app_db_secret_refs.py` - Extracts secret references from configuration_value table
+
+## SQL Query
 
 ```sql
 SELECT DISTINCT
@@ -15,8 +23,17 @@ WHERE cd.organization_handle = 'universityofedinburgh'
 ORDER BY cd.organization_handle DESC;
 ```
 
-Execution History
+## Output
+- `key_vault_secrets.csv` - List of unique secret UUIDs extracted from the database
 
-2026/02/02
-No duplicate secret_uuids found.
-Extracted 1221 secrets into key_vault_secrets.csv
+## Latest Execution History
+
+**2026/02/02**
+- No duplicate secret_uuids found
+- Extracted **1,221 secrets** into key_vault_secrets.csv
+- Active secrets: **1,219** (when compared with AWS Key Vault)
+
+## Key Tables
+- `configuration_value` - Stores configuration values with secret references
+- `configuration_mount` - Links configurations to components
+- `component_data` - Contains component and organization information

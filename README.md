@@ -71,6 +71,10 @@ flowchart TD
     end
 ```
 
+## Feature
+
+This branch implements **Feature A**.
+
 ## Key Features
 
 - **Stale Secret Detection**: Identifies secrets present in AWS Key Vault but not used in any database

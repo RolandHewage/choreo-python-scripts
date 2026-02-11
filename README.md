@@ -79,6 +79,10 @@ flowchart TD
 - **Flexible Sorting**: Sort results by various date criteria (last accessed, last changed, version created)
 - **Version Tracking**: Tracks multiple versions of secrets (AWSCURRENT, AWSPREVIOUS)
 
+## Feature
+
+bugfix-123
+
 ## Usage
 
 See individual README files in each subdirectory for specific script usage and SQL queries.

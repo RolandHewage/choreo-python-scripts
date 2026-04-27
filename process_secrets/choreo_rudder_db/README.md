@@ -4,7 +4,8 @@
 Extracts key vault secret references from the Choreo Rudder database by querying both secrets and config_maps tables for vault IDs.
 
 ## Scripts
-- `extract_rudder_db_secret_refs.py` - Primary extraction script
+- `extract_rudder_db_secret_refs.py` - Extracts secret references from the `.log` file (fixed-width table format)
+- `extract_rudder_db_secret_refs_csv.py` - Extracts secret references from `rudder_db_secrets.csv` (CSV format)
 - `extract_rudder_db_secret_refs_backup.py` - Backup version
 
 ## SQL Query
@@ -92,8 +93,13 @@ mediation-xpneqw-1319095223 -> 2 times
 mediation-nnkbbq-851980542 -> 3 times
 Extracted 844 secrets into key_vault_secrets.csv
 
-2026/02/02
-Valid vault_ids extracted : 692
-Rows skipped (empty vault_id): 152
-No duplicate vault_id values found.
+**2026/03/30**
+- Valid vault_ids extracted: **691**
+- Active secrets: **653** (when compared with AWS Key Vault)
+
+**2026/02/02**
+- Valid vault_ids extracted: **692**
+- Rows skipped (empty vault_id): 152
+- No duplicate vault_id values found.
+- Active secrets: **656** (when compared with AWS Key Vault)
 

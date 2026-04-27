@@ -62,6 +62,21 @@ python3 detect_stale_secrets_detailed.py
 python3 sort_stale_secrets.py
 ```
 
+### 4. `extract_delete_candidates.py`
+**Purpose**: Extract unique secret names from stale secrets for deletion
+
+**What it does**:
+- Reads `stale_secrets_detailed.csv`
+- Extracts unique `SecretName` values preserving CSV order
+- Writes them to a plain text file (one per line)
+
+**Output**: `delete_candidates.txt` - Unique stale secret names in original order
+
+**Usage**:
+```bash
+python3 extract_delete_candidates.py
+```
+
 ## Workflow
 
 1. **Run basic detection** (optional):
@@ -79,7 +94,39 @@ python3 sort_stale_secrets.py
    python3 sort_stale_secrets.py
    ```
 
+4. **Extract delete candidates**:
+   ```bash
+   python3 extract_delete_candidates.py
+   ```
+
 ## Latest Execution Summary
+
+**v2 (2026/03/30)**
+
+Summary:
+  AWS Key Vault secrets: 3443
+  DB folder secrets: 23206
+  Stale secrets: 71
+  Active secrets: 3372
+
+Active secrets by DB folder:
+  choreo_app_db: 1228 active secrets
+  choreo_cloud_manager_db: 0 active secrets
+  choreo_configuration_service_db: 1491 active secrets
+  choreo_rudder_db: 653 active secrets
+
+Detailed Analysis:
+  Total stale UUIDs: 71
+  UUIDs with audit data: 71
+  UUIDs without audit data: 0
+  Total rows in output (including all versions): 75
+
+Delete Candidates:
+  Unique delete candidates: 71
+  Common with v1: 39
+  New in v2 (not in v1): 32
+
+**v1 (2026/02/02)**
 
 Summary:
   AWS Key Vault secrets: 3720
@@ -103,8 +150,9 @@ Detailed Analysis:
 
 - **Multiple Versions**: Some secrets have multiple versions (AWSCURRENT + AWSPREVIOUS), resulting in more rows in detailed output than unique UUIDs
 - **Zero Cloud Manager Matches**: No direct matches found in Cloud Manager DB, suggesting different secret naming or storage approach
-- **High Active Rate**: 90.5% of AWS secrets are actively used across databases (3366 out of 3720)
-- **Cleanup Candidates**: 354 stale secrets identified as potential deletion candidates
+- **High Active Rate**: 97.9% of AWS secrets are actively used across databases (3372 out of 3443)
+- **Cleanup Candidates**: 71 stale secrets identified as potential deletion candidates
+- **v1 to v2 Delta**: Stale secrets dropped from 354 to 71; 39 secrets remain stale from v1, 32 are newly stale in v2
 
 ## Data Sources
 

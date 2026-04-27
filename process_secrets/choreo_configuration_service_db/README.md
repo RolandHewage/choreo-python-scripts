@@ -3,8 +3,9 @@
 ## Overview
 Extracts key vault secret references from the Choreo Configuration Service database by querying configuration values scoped to specific organizations.
 
-## Script
-- `extract_config_svc_db_secret_refs.py` - Extracts secret references from configuration_values table
+## Scripts
+- `extract_config_svc_db_secret_refs.py` - Extracts secret references from the `.log` file (fixed-width table format)
+- `extract_config_svc_db_secret_refs_csv.py` - Extracts secret references from `config_service_secrets.csv` (CSV format)
 
 ## SQL Query
 
@@ -23,6 +24,11 @@ WHERE cs.organization_uuid = 'f5aad5f4-4cac-40df-b0ed-e0c3ca8ae985'
 - `key_vault_secrets.csv` - List of unique secret UUIDs extracted from the database
 
 ## Latest Execution History
+
+**2026/03/30**
+- No duplicate value_ref entries found
+- Extracted **1,492 secrets** into key_vault_secrets.csv
+- Active secrets: **1,491** (when compared with AWS Key Vault)
 
 **2026/02/02**
 - No duplicate value_ref entries found

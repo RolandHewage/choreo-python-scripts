@@ -3,8 +3,9 @@
 ## Overview
 Extracts key vault secret references from the Choreo Cloud Manager database by aggregating reference tokens from multiple credential tables.
 
-## Script
-- `extract_cloud_manager_db_secret_refs.py` - Extracts secret references from credential tables
+## Scripts
+- `extract_cloud_manager_db_secret_refs.py` - Extracts secret references from the `.log` file (fixed-width table format)
+- `extract_cloud_manager_db_secret_refs_csv.py` - Extracts secret references from `cloud_manager_secrets.csv` (CSV format)
 
 ## SQL Query
 
@@ -65,6 +66,11 @@ ORDER BY source_table, created_at DESC;
 - `key_vault_secrets.csv` - List of unique reference tokens extracted from the database
 
 ## Latest Execution History
+
+**2026/03/30**
+- No duplicate secret_name values found
+- Extracted **19,793 secrets** into key_vault_secrets.csv
+- Active secrets: **0** (when compared with AWS Key Vault - no UUID format matches)
 
 **2026/02/02**
 - No duplicate secret_name values found
